@@ -1,7 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-/* main: function that prints in the stdout and return 0 */
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
 
 int main(void)
 {
