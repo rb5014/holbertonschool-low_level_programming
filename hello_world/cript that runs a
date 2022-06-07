@@ -910,4 +910,967 @@ OOPPTTIIOONNSS
 
            This invokes all subprograms of ggcccc under ggddbb ----aarrggss, thus the invocation of cccc11 is ggddbb ----aarrggss cccc11 .......
 
-       --
+       --ffffiillee--pprreeffiixx--mmaapp==_o_l_d==_n_e_w
+           When compiling files residing in directory _o_l_d, record any references to them in the result of the
+           compilation as if the files resided in directory _n_e_w instead.  Specifying this option is equivalent to
+           specifying all the individual --ff**--pprreeffiixx--mmaapp options.  This can be used to make reproducible builds that
+           are location independent.  See also --ffmmaaccrroo--pprreeffiixx--mmaapp and --ffddeebbuugg--pprreeffiixx--mmaapp.
+
+       --ffpplluuggiinn==_n_a_m_e..ssoo
+           Load the plugin code in file _n_a_m_e.so, assumed to be a shared object to be dlopen'd by the compiler.  The
+           base name of the shared object file is used to identify the plugin for the purposes of argument parsing
+           (See --ffpplluuggiinn--aarrgg--_n_a_m_e--_k_e_y==_v_a_l_u_e below).  Each plugin should define the callback functions specified in
+           the Plugins API.
+
+       --ffpplluuggiinn--aarrgg--_n_a_m_e--_k_e_y==_v_a_l_u_e
+           Define an argument called _k_e_y with a value of _v_a_l_u_e for the plugin called _n_a_m_e.
+
+       --ffdduummpp--aaddaa--ssppeecc[--sslliimm]
+           For C and C++ source and include files, generate corresponding Ada specs.
+
+       --ffaaddaa--ssppeecc--ppaarreenntt==_u_n_i_t
+           In conjunction with --ffdduummpp--aaddaa--ssppeecc[--sslliimm] above, generate Ada specs as child units of parent _u_n_i_t.
+
+       --ffdduummpp--ggoo--ssppeecc==_f_i_l_e
+           For input files in any language, generate corresponding Go declarations in _f_i_l_e.  This generates Go
+           "const", "type", "var", and "func" declarations which may be a useful way to start writing a Go interface
+           to code written in some other language.
+
+       @@_f_i_l_e
+           Read command-line options from _f_i_l_e.  The options read are inserted in place of the original @_f_i_l_e option.
+           If _f_i_l_e does not exist, or cannot be read, then the option will be treated literally, and not removed.
+
+           Options in _f_i_l_e are separated by whitespace.  A whitespace character may be included in an option by
+           surrounding the entire option in either single or double quotes.  Any character (including a backslash)
+           may be included by prefixing the character to be included with a backslash.  The _f_i_l_e may itself contain
+           additional @_f_i_l_e options; any such options will be processed recursively.
+
+   CCoommppiilliinngg CC++++ PPrrooggrraammss
+       C++ source files conventionally use one of the suffixes ..CC, ..cccc, ..ccpppp, ..CCPPPP, ..cc++++, ..ccpp, or ..ccxxxx; C++ header
+       files often use ..hhhh, ..hhpppp, ..HH, or (for shared template code) ..ttcccc; and preprocessed C++ files use the suffix
+       ..iiii.  GCC recognizes files with these names and compiles them as C++ programs even if you call the compiler
+       the same way as for compiling C programs (usually with the name ggcccc).
+
+       However, the use of ggcccc does not add the C++ library.  gg++++ is a program that calls GCC and automatically
+       specifies linking against the C++ library.  It treats ..cc, ..hh and ..ii files as C++ source files instead of C
+       source files unless --xx is used.  This program is also useful when precompiling a C header file with a ..hh
+       extension for use in C++ compilations.  On many systems, gg++++ is also installed with the name cc++++.
+
+       When you compile C++ programs, you may specify many of the same command-line options that you use for
+       compiling programs in any language; or command-line options meaningful for C and related languages; or options
+       that are meaningful only for C++ programs.
+
+   OOppttiioonnss CCoonnttrroolllliinngg CC DDiiaalleecctt
+       The following options control the dialect of C (or languages derived from C, such as C++, Objective-C and
+       Objective-C++) that the compiler accepts:
+
+       --aannssii
+           In C mode, this is equivalent to --ssttdd==cc9900. In C++ mode, it is equivalent to --ssttdd==cc++++9988.
+
+           This turns off certain features of GCC that are incompatible with ISO C90 (when compiling C code), or of
+           standard C++ (when compiling C++ code), such as the "asm" and "typeof" keywords, and predefined macros
+           such as "unix" and "vax" that identify the type of system you are using.  It also enables the undesirable
+           and rarely used ISO trigraph feature.  For the C compiler, it disables recognition of C++ style ////
+           comments as well as the "inline" keyword.
+
+           The alternate keywords "__asm__", "__extension__", "__inline__" and "__typeof__" continue to work despite
+           --aannssii.  You would not want to use them in an ISO C program, of course, but it is useful to put them in
+           header files that might be included in compilations done with --aannssii.  Alternate predefined macros such as
+           "__unix__" and "__vax__" are also available, with or without --aannssii.
+
+           The --aannssii option does not cause non-ISO programs to be rejected gratuitously.  For that, --WWppeeddaannttiicc is
+           required in addition to --aannssii.
+
+           The macro "__STRICT_ANSI__" is predefined when the --aannssii option is used.  Some header files may notice
+           this macro and refrain from declaring certain functions or defining certain macros that the ISO standard
+           doesn't call for; this is to avoid interfering with any programs that might use these names for other
+           things.
+
+           Functions that are normally built in but do not have semantics defined by ISO C (such as "alloca" and
+           "ffs") are not built-in functions when --aannssii is used.
+
+       --ssttdd==
+           Determine the language standard.   This option is currently only supported when compiling C or C++.
+
+           The compiler can accept several base standards, such as cc9900 or cc++++9988, and GNU dialects of those standards,
+           such as ggnnuu9900 or ggnnuu++++9988.  When a base standard is specified, the compiler accepts all programs following
+           that standard plus those using GNU extensions that do not contradict it.  For example, --ssttdd==cc9900 turns off
+           certain features of GCC that are incompatible with ISO C90, such as the "asm" and "typeof" keywords, but
+           not other GNU extensions that do not have a meaning in ISO C90, such as omitting the middle term of a "?:"
+           expression. On the other hand, when a GNU dialect of a standard is specified, all features supported by
+           the compiler are enabled, even when those features change the meaning of the base standard.  As a result,
+           some strict-conforming programs may be rejected.  The particular standard is used by --WWppeeddaannttiicc to
+           identify which features are GNU extensions given that version of the standard. For example --ssttdd==ggnnuu9900
+           --WWppeeddaannttiicc warns about C++ style //// comments, while --ssttdd==ggnnuu9999 --WWppeeddaannttiicc does not.
+
+           A value for this option must be provided; possible values are
+
+           cc9900
+           cc8899
+           iissoo99889999::11999900
+               Support all ISO C90 programs (certain GNU extensions that conflict with ISO C90 are disabled). Same as
+               --aannssii for C code.
+
+           iissoo99889999::119999440099
+               ISO C90 as modified in amendment 1.
+
+           cc9999
+           cc99xx
+           iissoo99889999::11999999
+           iissoo99889999::119999xx
+               ISO C99.  This standard is substantially completely supported, modulo bugs and floating-point issues
+               (mainly but not entirely relating to optional C99 features from Annexes F and G).  See
+               <hhttttpp::////ggcccc..ggnnuu..oorrgg//cc9999ssttaattuuss..hhttmmll> for more information.  The names cc99xx and iissoo99889999::119999xx are
+               deprecated.
+
+           cc1111
+           cc11xx
+           iissoo99889999::22001111
+               ISO C11, the 2011 revision of the ISO C standard.  This standard is substantially completely
+               supported, modulo bugs, floating-point issues (mainly but not entirely relating to optional C11
+               features from Annexes F and G) and the optional Annexes K (Bounds-checking interfaces) and L
+               (Analyzability).  The name cc11xx is deprecated.
+
+           cc1177
+           cc1188
+           iissoo99889999::22001177
+           iissoo99889999::22001188
+               ISO C17, the 2017 revision of the ISO C standard (published in 2018).  This standard is same as C11
+               except for corrections of defects (all of which are also applied with --ssttdd==cc1111) and a new value of
+               "__STDC_VERSION__", and so is supported to the same extent as C11.
+
+           cc22xx The next version of the ISO C standard, still under development.  The support for this version is
+               experimental and incomplete.
+
+           ggnnuu9900
+           ggnnuu8899
+               GNU dialect of ISO C90 (including some C99 features).
+
+           ggnnuu9999
+           ggnnuu99xx
+               GNU dialect of ISO C99.  The name ggnnuu99xx is deprecated.
+
+           ggnnuu1111
+           ggnnuu11xx
+               GNU dialect of ISO C11.  The name ggnnuu11xx is deprecated.
+
+           ggnnuu1177
+           ggnnuu1188
+               GNU dialect of ISO C17.  This is the default for C code.
+
+           ggnnuu22xx
+               The next version of the ISO C standard, still under development, plus GNU extensions.  The support for
+               this version is experimental and incomplete.
+
+           cc++++9988
+           cc++++0033
+               The 1998 ISO C++ standard plus the 2003 technical corrigendum and some additional defect reports. Same
+               as --aannssii for C++ code.
+
+           ggnnuu++++9988
+           ggnnuu++++0033
+               GNU dialect of --ssttdd==cc++++9988.
+
+           cc++++1111
+           cc++++00xx
+               The 2011 ISO C++ standard plus amendments.  The name cc++++00xx is deprecated.
+
+           ggnnuu++++1111
+           ggnnuu++++00xx
+               GNU dialect of --ssttdd==cc++++1111.  The name ggnnuu++++00xx is deprecated.
+
+           cc++++1144
+           cc++++11yy
+               The 2014 ISO C++ standard plus amendments.  The name cc++++11yy is deprecated.
+
+           ggnnuu++++1144
+           ggnnuu++++11yy
+               GNU dialect of --ssttdd==cc++++1144.  This is the default for C++ code.  The name ggnnuu++++11yy is deprecated.
+
+           cc++++1177
+           cc++++11zz
+               The 2017 ISO C++ standard plus amendments.  The name cc++++11zz is deprecated.
+
+           ggnnuu++++1177
+           ggnnuu++++11zz
+               GNU dialect of --ssttdd==cc++++1177.  The name ggnnuu++++11zz is deprecated.
+
+           cc++++22aa
+               The next revision of the ISO C++ standard, tentatively planned for 2020.  Support is highly
+               experimental, and will almost certainly change in incompatible ways in future releases.
+
+           ggnnuu++++22aa
+               GNU dialect of --ssttdd==cc++++22aa.  Support is highly experimental, and will almost certainly change in
+               incompatible ways in future releases.
+
+       --ffggnnuu8899--iinnlliinnee
+           The option --ffggnnuu8899--iinnlliinnee tells GCC to use the traditional GNU semantics for "inline" functions when in
+           C99 mode.
+
+           Using this option is roughly equivalent to adding the "gnu_inline" function attribute to all inline
+           functions.
+
+           The option --ffnnoo--ggnnuu8899--iinnlliinnee explicitly tells GCC to use the C99 semantics for "inline" when in C99 or
+           gnu99 mode (i.e., it specifies the default behavior).  This option is not supported in --ssttdd==cc9900 or
+           --ssttdd==ggnnuu9900 mode.
+
+           The preprocessor macros "__GNUC_GNU_INLINE__" and "__GNUC_STDC_INLINE__" may be used to check which
+           semantics are in effect for "inline" functions.
+
+       --ffppeerrmmiitttteedd--fflltt--eevvaall--mmeetthhooddss==_s_t_y_l_e
+           ISO/IEC TS 18661-3 defines new permissible values for "FLT_EVAL_METHOD" that indicate that operations and
+           constants with a semantic type that is an interchange or extended format should be evaluated to the
+           precision and range of that type.  These new values are a superset of those permitted under C99/C11, which
+           does not specify the meaning of other positive values of "FLT_EVAL_METHOD".  As such, code conforming to
+           C11 may not have been written expecting the possibility of the new values.
+
+           --ffppeerrmmiitttteedd--fflltt--eevvaall--mmeetthhooddss specifies whether the compiler should allow only the values of
+           "FLT_EVAL_METHOD" specified in C99/C11, or the extended set of values specified in ISO/IEC TS 18661-3.
+
+           _s_t_y_l_e is either "c11" or "ts-18661-3" as appropriate.
+
+           The default when in a standards compliant mode (--ssttdd==cc1111 or similar) is --ffppeerrmmiitttteedd--fflltt--eevvaall--mmeetthhooddss==cc1111.
+           The default when in a GNU dialect (--ssttdd==ggnnuu1111 or similar) is --ffppeerrmmiitttteedd--fflltt--eevvaall--mmeetthhooddss==ttss--1188666611--33.
+
+       --aauuxx--iinnffoo _f_i_l_e_n_a_m_e
+           Output to the given filename prototyped declarations for all functions declared and/or defined in a
+           translation unit, including those in header files.  This option is silently ignored in any language other
+           than C.
+
+           Besides declarations, the file indicates, in comments, the origin of each declaration (source file and
+           line), whether the declaration was implicit, prototyped or unprototyped (II, NN for new or OO for old,
+           respectively, in the first character after the line number and the colon), and whether it came from a
+           declaration or a definition (CC or FF, respectively, in the following character).  In the case of function
+           definitions, a K&R-style list of arguments followed by their declarations is also provided, inside
+           comments, after the declaration.
+
+       --ffaallllooww--ppaarraammeetteerrlleessss--vvaarriiaaddiicc--ffuunnccttiioonnss
+           Accept variadic functions without named parameters.
+
+           Although it is possible to define such a function, this is not very useful as it is not possible to read
+           the arguments.  This is only supported for C as this construct is allowed by C++.
+
+       --ffnnoo--aassmm
+           Do not recognize "asm", "inline" or "typeof" as a keyword, so that code can use these words as
+           identifiers.  You can use the keywords "__asm__", "__inline__" and "__typeof__" instead.  --aannssii implies
+           --ffnnoo--aassmm.
+
+           In C++, this switch only affects the "typeof" keyword, since "asm" and "inline" are standard keywords.
+           You may want to use the --ffnnoo--ggnnuu--kkeeyywwoorrddss flag instead, which has the same effect.  In C99 mode (--ssttdd==cc9999
+           or --ssttdd==ggnnuu9999), this switch only affects the "asm" and "typeof" keywords, since "inline" is a standard
+           keyword in ISO C99.
+
+       --ffnnoo--bbuuiillttiinn
+       --ffnnoo--bbuuiillttiinn--_f_u_n_c_t_i_o_n
+           Don't recognize built-in functions that do not begin with ____bbuuiillttiinn__ as prefix.
+
+           GCC normally generates special code to handle certain built-in functions more efficiently; for instance,
+           calls to "alloca" may become single instructions which adjust the stack directly, and calls to "memcpy"
+           may become inline copy loops.  The resulting code is often both smaller and faster, but since the function
+           calls no longer appear as such, you cannot set a breakpoint on those calls, nor can you change the
+           behavior of the functions by linking with a different library.  In addition, when a function is recognized
+           as a built-in function, GCC may use information about that function to warn about problems with calls to
+           that function, or to generate more efficient code, even if the resulting code still contains calls to that
+           function.  For example, warnings are given with --WWffoorrmmaatt for bad calls to "printf" when "printf" is built
+           in and "strlen" is known not to modify global memory.
+
+           With the --ffnnoo--bbuuiillttiinn--_f_u_n_c_t_i_o_n option only the built-in function _f_u_n_c_t_i_o_n is disabled.  _f_u_n_c_t_i_o_n must not
+           begin with ____bbuuiillttiinn__.  If a function is named that is not built-in in this version of GCC, this option is
+           ignored.  There is no corresponding --ffbbuuiillttiinn--_f_u_n_c_t_i_o_n option; if you wish to enable built-in functions
+           selectively when using --ffnnoo--bbuuiillttiinn or --ffffrreeeessttaannddiinngg, you may define macros such as:
+
+                   #define abs(n)          __builtin_abs ((n))
+                   #define strcpy(d, s)    __builtin_strcpy ((d), (s))
+
+       --ffggiimmppllee
+           Enable parsing of function definitions marked with "__GIMPLE".  This is an experimental feature that
+           allows unit testing of GIMPLE passes.
+
+       --ffhhoosstteedd
+           Assert that compilation targets a hosted environment.  This implies --ffbbuuiillttiinn.  A hosted environment is
+           one in which the entire standard library is available, and in which "main" has a return type of "int".
+           Examples are nearly everything except a kernel.  This is equivalent to --ffnnoo--ffrreeeessttaannddiinngg.
+
+       --ffffrreeeessttaannddiinngg
+           Assert that compilation targets a freestanding environment.  This implies --ffnnoo--bbuuiillttiinn.  A freestanding
+           environment is one in which the standard library may not exist, and program startup may not necessarily be
+           at "main".  The most obvious example is an OS kernel.  This is equivalent to --ffnnoo--hhoosstteedd.
+
+       --ffooppeennaacccc
+           Enable handling of OpenACC directives "#pragma acc" in C/C++ and "!$acc" in Fortran.  When --ffooppeennaacccc is
+           specified, the compiler generates accelerated code according to the OpenACC Application Programming
+           Interface v2.0 <hhttttppss::////wwwwww..ooppeennaacccc..oorrgg>.  This option implies --pptthhrreeaadd, and thus is only supported on
+           targets that have support for --pptthhrreeaadd.
+
+       --ffooppeennaacccc--ddiimm==_g_e_o_m
+           Specify default compute dimensions for parallel offload regions that do not explicitly specify.  The _g_e_o_m
+           value is a triple of ':'-separated sizes, in order 'gang', 'worker' and, 'vector'.  A size can be omitted,
+           to use a target-specific default value.
+
+       --ffooppeennmmpp
+           Enable handling of OpenMP directives "#pragma omp" in C/C++ and "!$omp" in Fortran.  When --ffooppeennmmpp is
+           specified, the compiler generates parallel code according to the OpenMP Application Program Interface v4.5
+           <hhttttppss::////wwwwww..ooppeennmmpp..oorrgg>.  This option implies --pptthhrreeaadd, and thus is only supported on targets that have
+           support for --pptthhrreeaadd. --ffooppeennmmpp implies --ffooppeennmmpp--ssiimmdd.
+
+       --ffooppeennmmpp--ssiimmdd
+           Enable handling of OpenMP's SIMD directives with "#pragma omp" in C/C++ and "!$omp" in Fortran. Other
+           OpenMP directives are ignored.
+
+       --ffggnnuu--ttmm
+           When the option --ffggnnuu--ttmm is specified, the compiler generates code for the Linux variant of Intel's
+           current Transactional Memory ABI specification document (Revision 1.1, May 6 2009).  This is an
+           experimental feature whose interface may change in future versions of GCC, as the official specification
+           changes.  Please note that not all architectures are supported for this feature.
+
+           For more information on GCC's support for transactional memory,
+
+           Note that the transactional memory feature is not supported with non-call exceptions
+           (--ffnnoonn--ccaallll--eexxcceeppttiioonnss).
+
+       --ffmmss--eexxtteennssiioonnss
+           Accept some non-standard constructs used in Microsoft header files.
+
+           In C++ code, this allows member names in structures to be similar to previous types declarations.
+
+                   typedef int UOW;
+                   struct ABC {
+                     UOW UOW;
+                   };
+
+           Some cases of unnamed fields in structures and unions are only accepted with this option.
+
+           Note that this option is off for all targets but x86 targets using ms-abi.
+
+       --ffppllaann99--eexxtteennssiioonnss
+           Accept some non-standard constructs used in Plan 9 code.
+
+           This enables --ffmmss--eexxtteennssiioonnss, permits passing pointers to structures with anonymous fields to functions
+           that expect pointers to elements of the type of the field, and permits referring to anonymous fields
+           declared using a typedef.    This is only supported for C, not C++.
+
+       --ffccoonndd--mmiissmmaattcchh
+           Allow conditional expressions with mismatched types in the second and third arguments.  The value of such
+           an expression is void.  This option is not supported for C++.
+
+       --ffllaaxx--vveeccttoorr--ccoonnvveerrssiioonnss
+           Allow implicit conversions between vectors with differing numbers of elements and/or incompatible element
+           types.  This option should not be used for new code.
+
+       --ffuunnssiiggnneedd--cchhaarr
+           Let the type "char" be unsigned, like "unsigned char".
+
+           Each kind of machine has a default for what "char" should be.  It is either like "unsigned char" by
+           default or like "signed char" by default.
+
+           Ideally, a portable program should always use "signed char" or "unsigned char" when it depends on the
+           signedness of an object.  But many programs have been written to use plain "char" and expect it to be
+           signed, or expect it to be unsigned, depending on the machines they were written for.  This option, and
+           its inverse, let you make such a program work with the opposite default.
+
+           The type "char" is always a distinct type from each of "signed char" or "unsigned char", even though its
+           behavior is always just like one of those two.
+
+       --ffssiiggnneedd--cchhaarr
+           Let the type "char" be signed, like "signed char".
+
+           Note that this is equivalent to --ffnnoo--uunnssiiggnneedd--cchhaarr, which is the negative form of --ffuunnssiiggnneedd--cchhaarr.
+           Likewise, the option --ffnnoo--ssiiggnneedd--cchhaarr is equivalent to --ffuunnssiiggnneedd--cchhaarr.
+
+       --ffssiiggnneedd--bbiittffiieellddss
+       --ffuunnssiiggnneedd--bbiittffiieellddss
+       --ffnnoo--ssiiggnneedd--bbiittffiieellddss
+       --ffnnoo--uunnssiiggnneedd--bbiittffiieellddss
+           These options control whether a bit-field is signed or unsigned, when the declaration does not use either
+           "signed" or "unsigned".  By default, such a bit-field is signed, because this is consistent: the basic
+           integer types such as "int" are signed types.
+
+       --ffssssoo--ssttrruucctt==_e_n_d_i_a_n_n_e_s_s
+           Set the default scalar storage order of structures and unions to the specified endianness.  The accepted
+           values are bbiigg--eennddiiaann, lliittttllee--eennddiiaann and nnaattiivvee for the native endianness of the target (the default).
+           This option is not supported for C++.
+
+           WWaarrnniinngg:: the --ffssssoo--ssttrruucctt switch causes GCC to generate code that is not binary compatible with code
+           generated without it if the specified endianness is not the native endianness of the target.
+
+   OOppttiioonnss CCoonnttrroolllliinngg CC++++ DDiiaalleecctt
+       This section describes the command-line options that are only meaningful for C++ programs.  You can also use
+       most of the GNU compiler options regardless of what language your program is in.  For example, you might
+       compile a file _f_i_r_s_t_C_l_a_s_s_._C like this:
+
+               g++ -g -fstrict-enums -O -c firstClass.C
+
+       In this example, only --ffssttrriicctt--eennuummss is an option meant only for C++ programs; you can use the other options
+       with any language supported by GCC.
+
+       Some options for compiling C programs, such as --ssttdd, are also relevant for C++ programs.
+
+       Here is a list of options that are _o_n_l_y for compiling C++ programs:
+
+       --ffaabbii--vveerrssiioonn==_n
+           Use version _n of the C++ ABI.  The default is version 0.
+
+           Version 0 refers to the version conforming most closely to the C++ ABI specification.  Therefore, the ABI
+           obtained using version 0 will change in different versions of G++ as ABI bugs are fixed.
+
+           Version 1 is the version of the C++ ABI that first appeared in G++ 3.2.
+
+           Version 2 is the version of the C++ ABI that first appeared in G++ 3.4, and was the default through G++
+           4.9.
+
+           Version 3 corrects an error in mangling a constant address as a template argument.
+
+           Version 4, which first appeared in G++ 4.5, implements a standard mangling for vector types.
+
+           Version 5, which first appeared in G++ 4.6, corrects the mangling of attribute const/volatile on function
+           pointer types, decltype of a plain decl, and use of a function parameter in the declaration of another
+           parameter.
+
+           Version 6, which first appeared in G++ 4.7, corrects the promotion behavior of C++11 scoped enums and the
+           mangling of template argument packs, const/static_cast, prefix ++ and --, and a class scope function used
+           as a template argument.
+
+           Version 7, which first appeared in G++ 4.8, that treats nullptr_t as a builtin type and corrects the
+           mangling of lambdas in default argument scope.
+
+           Version 8, which first appeared in G++ 4.9, corrects the substitution behavior of function types with
+           function-cv-qualifiers.
+
+           Version 9, which first appeared in G++ 5.2, corrects the alignment of "nullptr_t".
+
+           Version 10, which first appeared in G++ 6.1, adds mangling of attributes that affect type identity, such
+           as ia32 calling convention attributes (e.g. ssttddccaallll).
+
+           Version 11, which first appeared in G++ 7, corrects the mangling of sizeof... expressions and operator
+           names.  For multiple entities with the same name within a function, that are declared in different scopes,
+           the mangling now changes starting with the twelfth occurrence.  It also implies --ffnneeww--iinnhheerriittiinngg--ccttoorrss.
+
+           Version 12, which first appeared in G++ 8, corrects the calling conventions for empty classes on the
+           x86_64 target and for classes with only deleted copy/move constructors.  It accidentally changes the
+           calling convention for classes with a deleted copy constructor and a trivial move constructor.
+
+           Version 13, which first appeared in G++ 8.2, fixes the accidental change in version 12.
+
+           See also --WWaabbii.
+
+       --ffaabbii--ccoommppaatt--vveerrssiioonn==_n
+           On targets that support strong aliases, G++ works around mangling changes by creating an alias with the
+           correct mangled name when defining a symbol with an incorrect mangled name.  This switch specifies which
+           ABI version to use for the alias.
+
+           With --ffaabbii--vveerrssiioonn==00 (the default), this defaults to 11 (GCC 7 compatibility).  If another ABI version is
+           explicitly selected, this defaults to 0.  For compatibility with GCC versions 3.2 through 4.9, use
+           --ffaabbii--ccoommppaatt--vveerrssiioonn==22.
+
+           If this option is not provided but --WWaabbii==_n is, that version is used for compatibility aliases.  If this
+           option is provided along with --WWaabbii (without the version), the version from this option is used for the
+           warning.
+
+       --ffnnoo--aacccceessss--ccoonnttrrooll
+           Turn off all access checking.  This switch is mainly useful for working around bugs in the access control
+           code.
+
+       --ffaalliiggnneedd--nneeww
+           Enable support for C++17 "new" of types that require more alignment than "void* ::operator
+           new(std::size_t)" provides.  A numeric argument such as "-faligned-new=32" can be used to specify how much
+           alignment (in bytes) is provided by that function, but few users will need to override the default of
+           "alignof(std::max_align_t)".
+
+           This flag is enabled by default for --ssttdd==cc++++1177.
+
+       --ffcchhaarr88__tt
+       --ffnnoo--cchhaarr88__tt
+           Enable support for "char8_t" as adopted for C++2a.  This includes the addition of a new "char8_t"
+           fundamental type, changes to the types of UTF-8 string and character literals, new signatures for user-
+           defined literals, associated standard library updates, and new "__cpp_char8_t" and "__cpp_lib_char8_t"
+           feature test macros.
+
+           This option enables functions to be overloaded for ordinary and UTF-8 strings:
+
+                   int f(const char *);    // #1
+                   int f(const char8_t *); // #2
+                   int v1 = f("text");     // Calls #1
+                   int v2 = f(u8"text");   // Calls #2
+
+           and introduces new signatures for user-defined literals:
+
+                   int operator""_udl1(char8_t);
+                   int v3 = u8'x'_udl1;
+                   int operator""_udl2(const char8_t*, std::size_t);
+                   int v4 = u8"text"_udl2;
+                   template<typename T, T...> int operator""_udl3();
+                   int v5 = u8"text"_udl3;
+
+           The change to the types of UTF-8 string and character literals introduces incompatibilities with ISO C++11
+           and later standards.  For example, the following code is well-formed under ISO C++11, but is ill-formed
+           when --ffcchhaarr88__tt is specified.
+
+                   char ca[] = u8"xx";     // error: char-array initialized from wide
+                                           //        string
+                   const char *cp = u8"xx";// error: invalid conversion from
+                                           //        `const char8_t*' to `const char*'
+                   int f(const char*);
+                   auto v = f(u8"xx");     // error: invalid conversion from
+                                           //        `const char8_t*' to `const char*'
+                   std::string s{u8"xx"};  // error: no matching function for call to
+                                           //        `std::basic_string<char>::basic_string()'
+                   using namespace std::literals;
+                   s = u8"xx"s;            // error: conversion from
+                                           //        `basic_string<char8_t>' to non-scalar
+                                           //        type `basic_string<char>' requested
+
+       --ffcchheecckk--nneeww
+           Check that the pointer returned by "operator new" is non-null before attempting to modify the storage
+           allocated.  This check is normally unnecessary because the C++ standard specifies that "operator new" only
+           returns 0 if it is declared "throw()", in which case the compiler always checks the return value even
+           without this option.  In all other cases, when "operator new" has a non-empty exception specification,
+           memory exhaustion is signalled by throwing "std::bad_alloc".  See also nneeww ((nnootthhrrooww)).
+
+       --ffccoonncceeppttss
+           Enable support for the C++ Extensions for Concepts Technical Specification, ISO 19217 (2015), which allows
+           code like
+
+                   template <class T> concept bool Addable = requires (T t) { t + t; };
+                   template <Addable T> T add (T a, T b) { return a + b; }
+
+       --ffccoonnsstteexxpprr--ddeepptthh==_n
+           Set the maximum nested evaluation depth for C++11 constexpr functions to _n.  A limit is needed to detect
+           endless recursion during constant expression evaluation.  The minimum specified by the standard is 512.
+
+       --ffccoonnsstteexxpprr--lloooopp--lliimmiitt==_n
+           Set the maximum number of iterations for a loop in C++14 constexpr functions to _n.  A limit is needed to
+           detect infinite loops during constant expression evaluation.  The default is 262144 (1<<18).
+
+       --ffccoonnsstteexxpprr--ooppss--lliimmiitt==_n
+           Set the maximum number of operations during a single constexpr evaluation.  Even when number of iterations
+           of a single loop is limited with the above limit, if there are several nested loops and each of them has
+           many iterations but still smaller than the above limit, or if in a body of some loop or even outside of a
+           loop too many expressions need to be evaluated, the resulting constexpr evaluation might take too long.
+           The default is 33554432 (1<<25).
+
+       --ffddeedduuccee--iinniitt--lliisstt
+           Enable deduction of a template type parameter as "std::initializer_list" from a brace-enclosed initializer
+           list, i.e.
+
+                   template <class T> auto forward(T t) -> decltype (realfn (t))
+                   {
+                     return realfn (t);
+                   }
+
+                   void f()
+                   {
+                     forward({1,2}); // call forward<std::initializer_list<int>>
+                   }
+
+           This deduction was implemented as a possible extension to the originally proposed semantics for the C++11
+           standard, but was not part of the final standard, so it is disabled by default.  This option is
+           deprecated, and may be removed in a future version of G++.
+
+       --ffnnoo--eelliiddee--ccoonnssttrruuccttoorrss
+           The C++ standard allows an implementation to omit creating a temporary that is only used to initialize
+           another object of the same type.  Specifying this option disables that optimization, and forces G++ to
+           call the copy constructor in all cases.  This option also causes G++ to call trivial member functions
+           which otherwise would be expanded inline.
+
+           In C++17, the compiler is required to omit these temporaries, but this option still affects trivial member
+           functions.
+
+       --ffnnoo--eennffoorrccee--eehh--ssppeeccss
+           Don't generate code to check for violation of exception specifications at run time.  This option violates
+           the C++ standard, but may be useful for reducing code size in production builds, much like defining
+           "NDEBUG".  This does not give user code permission to throw exceptions in violation of the exception
+           specifications; the compiler still optimizes based on the specifications, so throwing an unexpected
+           exception results in undefined behavior at run time.
+
+       --ffeexxtteerrnn--ttllss--iinniitt
+       --ffnnoo--eexxtteerrnn--ttllss--iinniitt
+           The C++11 and OpenMP standards allow "thread_local" and "threadprivate" variables to have dynamic
+           (runtime) initialization.  To support this, any use of such a variable goes through a wrapper function
+           that performs any necessary initialization.  When the use and definition of the variable are in the same
+           translation unit, this overhead can be optimized away, but when the use is in a different translation unit
+           there is significant overhead even if the variable doesn't actually need dynamic initialization.  If the
+           programmer can be sure that no use of the variable in a non-defining TU needs to trigger dynamic
+           initialization (either because the variable is statically initialized, or a use of the variable in the
+           defining TU will be executed before any uses in another TU), they can avoid this overhead with the
+           --ffnnoo--eexxtteerrnn--ttllss--iinniitt option.
+
+           On targets that support symbol aliases, the default is --ffeexxtteerrnn--ttllss--iinniitt.  On targets that do not support
+           symbol aliases, the default is --ffnnoo--eexxtteerrnn--ttllss--iinniitt.
+
+       --ffnnoo--ggnnuu--kkeeyywwoorrddss
+           Do not recognize "typeof" as a keyword, so that code can use this word as an identifier.  You can use the
+           keyword "__typeof__" instead.  This option is implied by the strict ISO C++ dialects: --aannssii, --ssttdd==cc++++9988,
+           --ssttdd==cc++++1111, etc.
+
+       --ffnnoo--iimmpplliicciitt--tteemmppllaatteess
+           Never emit code for non-inline templates that are instantiated implicitly (i.e. by use); only emit code
+           for explicit instantiations.  If you use this option, you must take care to structure your code to include
+           all the necessary explicit instantiations to avoid getting undefined symbols at link time.
+
+       --ffnnoo--iimmpplliicciitt--iinnlliinnee--tteemmppllaatteess
+           Don't emit code for implicit instantiations of inline templates, either.  The default is to handle inlines
+           differently so that compiles with and without optimization need the same set of explicit instantiations.
+
+       --ffnnoo--iimmpplleemmeenntt--iinnlliinneess
+           To save space, do not emit out-of-line copies of inline functions controlled by "#pragma implementation".
+           This causes linker errors if these functions are not inlined everywhere they are called.
+
+       --ffmmss--eexxtteennssiioonnss
+           Disable Wpedantic warnings about constructs used in MFC, such as implicit int and getting a pointer to
+           member function via non-standard syntax.
+
+       --ffnneeww--iinnhheerriittiinngg--ccttoorrss
+           Enable the P0136 adjustment to the semantics of C++11 constructor inheritance.  This is part of C++17 but
+           also considered to be a Defect Report against C++11 and C++14.  This flag is enabled by default unless
+           --ffaabbii--vveerrssiioonn==1100 or lower is specified.
+
+       --ffnneeww--ttttpp--mmaattcchhiinngg
+           Enable the P0522 resolution to Core issue 150, template template parameters and default arguments: this
+           allows a template with default template arguments as an argument for a template template parameter with
+           fewer template parameters.  This flag is enabled by default for --ssttdd==cc++++1177.
+
+       --ffnnoo--nnoonnaannssii--bbuuiillttiinnss
+           Disable built-in declarations of functions that are not mandated by ANSI/ISO C.  These include "ffs",
+           "alloca", "_exit", "index", "bzero", "conjf", and other related functions.
+
+       --ffnnootthhrrooww--oopptt
+           Treat a "throw()" exception specification as if it were a "noexcept" specification to reduce or eliminate
+           the text size overhead relative to a function with no exception specification.  If the function has local
+           variables of types with non-trivial destructors, the exception specification actually makes the function
+           smaller because the EH cleanups for those variables can be optimized away.  The semantic effect is that an
+           exception thrown out of a function with such an exception specification results in a call to "terminate"
+           rather than "unexpected".
+
+       --ffnnoo--ooppeerraattoorr--nnaammeess
+           Do not treat the operator name keywords "and", "bitand", "bitor", "compl", "not", "or" and "xor" as
+           synonyms as keywords.
+
+       --ffnnoo--ooppttiioonnaall--ddiiaaggss
+           Disable diagnostics that the standard says a compiler does not need to issue.  Currently, the only such
+           diagnostic issued by G++ is the one for a name having multiple meanings within a class.
+
+       --ffppeerrmmiissssiivvee
+           Downgrade some diagnostics about nonconformant code from errors to warnings.  Thus, using --ffppeerrmmiissssiivvee
+           allows some nonconforming code to compile.
+
+       --ffnnoo--pprreettttyy--tteemmppllaatteess
+           When an error message refers to a specialization of a function template, the compiler normally prints the
+           signature of the template followed by the template arguments and any typedefs or typenames in the
+           signature (e.g. "void f(T) [with T = int]" rather than "void f(int)") so that it's clear which template is
+           involved.  When an error message refers to a specialization of a class template, the compiler omits any
+           template arguments that match the default template arguments for that template.  If either of these
+           behaviors make it harder to understand the error message rather than easier, you can use
+           --ffnnoo--pprreettttyy--tteemmppllaatteess to disable them.
+
+       --ffrreeppoo
+           Enable automatic template instantiation at link time.  This option also implies --ffnnoo--iimmpplliicciitt--tteemmppllaatteess.
+
+       --ffnnoo--rrttttii
+           Disable generation of information about every class with virtual functions for use by the C++ run-time
+           type identification features ("dynamic_cast" and "typeid").  If you don't use those parts of the language,
+           you can save some space by using this flag.  Note that exception handling uses the same information, but
+           G++ generates it as needed. The "dynamic_cast" operator can still be used for casts that do not require
+           run-time type information, i.e. casts to "void *" or to unambiguous base classes.
+
+           Mixing code compiled with --ffrrttttii with that compiled with --ffnnoo--rrttttii may not work.  For example, programs
+           may fail to link if a class compiled with --ffnnoo--rrttttii is used as a base for a class compiled with --ffrrttttii.
+
+       --ffssiizzeedd--ddeeaallllooccaattiioonn
+           Enable the built-in global declarations
+
+                   void operator delete (void *, std::size_t) noexcept;
+                   void operator delete[] (void *, std::size_t) noexcept;
+
+           as introduced in C++14.  This is useful for user-defined replacement deallocation functions that, for
+           example, use the size of the object to make deallocation faster.  Enabled by default under --ssttdd==cc++++1144 and
+           above.  The flag --WWssiizzeedd--ddeeaallllooccaattiioonn warns about places that might want to add a definition.
+
+       --ffssttrriicctt--eennuummss
+           Allow the compiler to optimize using the assumption that a value of enumerated type can only be one of the
+           values of the enumeration (as defined in the C++ standard; basically, a value that can be represented in
+           the minimum number of bits needed to represent all the enumerators).  This assumption may not be valid if
+           the program uses a cast to convert an arbitrary integer value to the enumerated type.
+
+       --ffssttrroonngg--eevvaall--oorrddeerr
+           Evaluate member access, array subscripting, and shift expressions in left-to-right order, and evaluate
+           assignment in right-to-left order, as adopted for C++17.  Enabled by default with --ssttdd==cc++++1177.
+           --ffssttrroonngg--eevvaall--oorrddeerr==ssoommee enables just the ordering of member access and shift expressions, and is the
+           default without --ssttdd==cc++++1177.
+
+       --fftteemmppllaattee--bbaacckkttrraaccee--lliimmiitt==_n
+           Set the maximum number of template instantiation notes for a single warning or error to _n.  The default
+           value is 10.
+
+       --fftteemmppllaattee--ddeepptthh==_n
+           Set the maximum instantiation depth for template classes to _n.  A limit on the template instantiation
+           depth is needed to detect endless recursions during template class instantiation.  ANSI/ISO C++ conforming
+           programs must not rely on a maximum depth greater than 17 (changed to 1024 in C++11).  The default value
+           is 900, as the compiler can run out of stack space before hitting 1024 in some situations.
+
+       --ffnnoo--tthhrreeaaddssaaffee--ssttaattiiccss
+           Do not emit the extra code to use the routines specified in the C++ ABI for thread-safe initialization of
+           local statics.  You can use this option to reduce code size slightly in code that doesn't need to be
+           thread-safe.
+
+       --ffuussee--ccxxaa--aatteexxiitt
+           Register destructors for objects with static storage duration with the "__cxa_atexit" function rather than
+           the "atexit" function.  This option is required for fully standards-compliant handling of static
+           destructors, but only works if your C library supports "__cxa_atexit".
+
+       --ffnnoo--uussee--ccxxaa--ggeett--eexxcceeppttiioonn--ppttrr
+           Don't use the "__cxa_get_exception_ptr" runtime routine.  This causes "std::uncaught_exception" to be
+           incorrect, but is necessary if the runtime routine is not available.
+
+       --ffvviissiibbiilliittyy--iinnlliinneess--hhiiddddeenn
+           This switch declares that the user does not attempt to compare pointers to inline functions or methods
+           where the addresses of the two functions are taken in different shared objects.
+
+           The effect of this is that GCC may, effectively, mark inline methods with "__attribute__ ((visibility
+           ("hidden")))" so that they do not appear in the export table of a DSO and do not require a PLT indirection
+           when used within the DSO.  Enabling this option can have a dramatic effect on load and link times of a DSO
+           as it massively reduces the size of the dynamic export table when the library makes heavy use of
+           templates.
+
+           The behavior of this switch is not quite the same as marking the methods as hidden directly, because it
+           does not affect static variables local to the function or cause the compiler to deduce that the function
+           is defined in only one shared object.
+
+           You may mark a method as having a visibility explicitly to negate the effect of the switch for that
+           method.  For example, if you do want to compare pointers to a particular inline method, you might mark it
+           as having default visibility.  Marking the enclosing class with explicit visibility has no effect.
+
+           Explicitly instantiated inline methods are unaffected by this option as their linkage might otherwise
+           cross a shared library boundary.
+
+       --ffvviissiibbiilliittyy--mmss--ccoommppaatt
+           This flag attempts to use visibility settings to make GCC's C++ linkage model compatible with that of
+           Microsoft Visual Studio.
+
+           The flag makes these changes to GCC's linkage model:
+
+           1.  It sets the default visibility to "hidden", like --ffvviissiibbiilliittyy==hhiiddddeenn.
+
+           2.  Types, but not their members, are not hidden by default.
+
+           3.  The One Definition Rule is relaxed for types without explicit visibility specifications that are
+               defined in more than one shared object: those declarations are permitted if they are permitted when
+               this option is not used.
+
+           In new code it is better to use --ffvviissiibbiilliittyy==hhiiddddeenn and export those classes that are intended to be
+           externally visible.  Unfortunately it is possible for code to rely, perhaps accidentally, on the Visual
+           Studio behavior.
+
+           Among the consequences of these changes are that static data members of the same type with the same name
+           but defined in different shared objects are different, so changing one does not change the other; and that
+           pointers to function members defined in different shared objects may not compare equal.  When this flag is
+           given, it is a violation of the ODR to define types with the same name differently.
+
+       --ffnnoo--wweeaakk
+           Do not use weak symbol support, even if it is provided by the linker.  By default, G++ uses weak symbols
+           if they are available.  This option exists only for testing, and should not be used by end-users; it
+           results in inferior code and has no benefits.  This option may be removed in a future release of G++.
+
+       --nnoossttddiinncc++++
+           Do not search for header files in the standard directories specific to C++, but do still search the other
+           standard directories.  (This option is used when building the C++ library.)
+
+       In addition, these optimization, warning, and code generation options have meanings only for C++ programs:
+
+       --WWaabbii (C, Objective-C, C++ and Objective-C++ only)
+           Warn when G++ it generates code that is probably not compatible with the vendor-neutral C++ ABI.  Since
+           G++ now defaults to updating the ABI with each major release, normally --WWaabbii will warn only if there is a
+           check added later in a release series for an ABI issue discovered since the initial release.  --WWaabbii will
+           warn about more things if an older ABI version is selected (with --ffaabbii--vveerrssiioonn==_n).
+
+           --WWaabbii can also be used with an explicit version number to warn about compatibility with a particular
+           --ffaabbii--vveerrssiioonn level, e.g. --WWaabbii==22 to warn about changes relative to --ffaabbii--vveerrssiioonn==22.
+
+           If an explicit version number is provided and --ffaabbii--ccoommppaatt--vveerrssiioonn is not specified, the version number
+           from this option is used for compatibility aliases.  If no explicit version number is provided with this
+           option, but --ffaabbii--ccoommppaatt--vveerrssiioonn is specified, that version number is used for ABI warnings.
+
+           Although an effort has been made to warn about all such cases, there are probably some cases that are not
+           warned about, even though G++ is generating incompatible code.  There may also be cases where warnings are
+           emitted even though the code that is generated is compatible.
+
+           You should rewrite your code to avoid these warnings if you are concerned about the fact that code
+           generated by G++ may not be binary compatible with code generated by other compilers.
+
+           Known incompatibilities in --ffaabbii--vveerrssiioonn==22 (which was the default from GCC 3.4 to 4.9) include:
+
+           *   A template with a non-type template parameter of reference type was mangled incorrectly:
+
+                       extern int N;
+                       template <int &> struct S {};
+                       void n (S<N>) {2}
+
+               This was fixed in --ffaabbii--vveerrssiioonn==33.
+
+           *   SIMD vector types declared using "__attribute ((vector_size))" were mangled in a non-standard way that
+               does not allow for overloading of functions taking vectors of different sizes.
+
+               The mangling was changed in --ffaabbii--vveerrssiioonn==44.
+
+           *   "__attribute ((const))" and "noreturn" were mangled as type qualifiers, and "decltype" of a plain
+               declaration was folded away.
+
+               These mangling issues were fixed in --ffaabbii--vveerrssiioonn==55.
+
+           *   Scoped enumerators passed as arguments to a variadic function are promoted like unscoped enumerators,
+               causing "va_arg" to complain.  On most targets this does not actually affect the parameter passing
+               ABI, as there is no way to pass an argument smaller than "int".
+
+               Also, the ABI changed the mangling of template argument packs, "const_cast", "static_cast", prefix
+               increment/decrement, and a class scope function used as a template argument.
+
+               These issues were corrected in --ffaabbii--vveerrssiioonn==66.
+
+           *   Lambdas in default argument scope were mangled incorrectly, and the ABI changed the mangling of
+               "nullptr_t".
+
+               These issues were corrected in --ffaabbii--vveerrssiioonn==77.
+
+           *   When mangling a function type with function-cv-qualifiers, the un-qualified function type was
+               incorrectly treated as a substitution candidate.
+
+               This was fixed in --ffaabbii--vveerrssiioonn==88, the default for GCC 5.1.
+
+           *   "decltype(nullptr)" incorrectly had an alignment of 1, leading to unaligned accesses.  Note that this
+               did not affect the ABI of a function with a "nullptr_t" parameter, as parameters have a minimum
+               alignment.
+
+               This was fixed in --ffaabbii--vveerrssiioonn==99, the default for GCC 5.2.
+
+           *   Target-specific attributes that affect the identity of a type, such as ia32 calling conventions on a
+               function type (stdcall, regparm, etc.), did not affect the mangled name, leading to name collisions
+               when function pointers were used as template arguments.
+
+               This was fixed in --ffaabbii--vveerrssiioonn==1100, the default for GCC 6.1.
+
+           It also warns about psABI-related changes.  The known psABI changes at this point include:
+
+           *   For SysV/x86-64, unions with "long double" members are passed in memory as specified in psABI.  For
+               example:
+
+                       union U {
+                         long double ld;
+                         int i;
+                       };
+
+               "union U" is always passed in memory.
+
+       --WWaabbii--ttaagg (C++ and Objective-C++ only)
+           Warn when a type with an ABI tag is used in a context that does not have that ABI tag.  See CC++++ AAttttrriibbuutteess
+           for more information about ABI tags.
+
+       --WWccttoorr--ddttoorr--pprriivvaaccyy (C++ and Objective-C++ only)
+           Warn when a class seems unusable because all the constructors or destructors in that class are private,
+           and it has neither friends nor public static member functions.  Also warn if there are no non-private
+           methods, and there's at least one private member function that isn't a constructor or destructor.
+
+       --WWddeelleettee--nnoonn--vviirrttuuaall--ddttoorr (C++ and Objective-C++ only)
+           Warn when "delete" is used to destroy an instance of a class that has virtual functions and non-virtual
+           destructor. It is unsafe to delete an instance of a derived class through a pointer to a base class if the
+           base class does not have a virtual destructor.  This warning is enabled by --WWaallll.
+
+       --WWddeepprreeccaatteedd--ccooppyy (C++ and Objective-C++ only)
+           Warn that the implicit declaration of a copy constructor or copy assignment operator is deprecated if the
+           class has a user-provided copy constructor or copy assignment operator, in C++11 and up.  This warning is
+           enabled by --WWeexxttrraa.  With --WWddeepprreeccaatteedd--ccooppyy--ddttoorr, also deprecate if the class has a user-provided
+           destructor.
+
+       --WWnnoo--iinniitt--lliisstt--lliiffeettiimmee (C++ and Objective-C++ only)
+           Do not warn about uses of "std::initializer_list" that are likely to result in dangling pointers.  Since
+           the underlying array for an "initializer_list" is handled like a normal C++ temporary object, it is easy
+           to inadvertently keep a pointer to the array past the end of the array's lifetime.  For example:
+
+           *   If a function returns a temporary "initializer_list", or a local "initializer_list" variable, the
+               array's lifetime ends at the end of the return statement, so the value returned has a dangling
+               pointer.
+
+           *   If a new-expression creates an "initializer_list", the array only lives until the end of the enclosing
+               full-expression, so the "initializer_list" in the heap has a dangling pointer.
+
+           *   When an "initializer_list" variable is assigned from a brace-enclosed initializer list, the temporary
+               array created for the right side of the assignment only lives until the end of the full-expression, so
+               at the next statement the "initializer_list" variable has a dangling pointer.
+
+                       // li's initial underlying array lives as long as li
+                       std::initializer_list<int> li = { 1,2,3 };
+                       // assignment changes li to point to a temporary array
+                       li = { 4, 5 };
+                       // now the temporary is gone and li has a dangling pointer
+                       int i = li.begin()[0] // undefined behavior
+
+           *   When a list constructor stores the "begin" pointer from the "initializer_list" argument, this doesn't
+               extend the lifetime of the array, so if a class variable is constructed from a temporary
+               "initializer_list", the pointer is left dangling by the end of the variable declaration statement.
+
+       --WWlliitteerraall--ssuuffffiixx (C++ and Objective-C++ only)
+           Warn when a string or character literal is followed by a ud-suffix which does not begin with an
+           underscore.  As a conforming extension, GCC treats such suffixes as separate preprocessing tokens in order
+           to maintain backwards compatibility with code that uses formatting macros from "<inttypes.h>".  For
+           example:
+
+                   #define __STDC_FORMAT_MACROS
+                   #include <inttypes.h>
+                   #include <stdio.h>
+
+                   int main() {
+                     int64_t i64 = 123;
+                     printf("My int64: %" PRId64"\n", i64);
+                   }
+
+           In this case, "PRId64" is treated as a separate preprocessing token.
+
+           Additionally, warn when a user-defined literal operator is declared with a literal suffix identifier that
+           doesn't begin with an underscore. Literal suffix identifiers that don't begin with an underscore are
+           reserved for future standardization.
+
+           This warning is enabled by default.
+
+       --WWllttoo--ttyyppee--mmiissmmaattcchh
+           During the link-time optimization warn about type mismatches in global declarations from different
+           compilation units.  Requires --ffllttoo to be enabled.  Enabled by default.
+
+       --WWnnoo--nnaarrrroowwiinngg (C++ and Objective-C++ only)
+           For C++11 and later standards, narrowing conversions are diagnosed by default, as required by the
+           standard.  A narrowing conversion from a constant produces an error, and a narrowing conversion from a
+           non-constant produces a warning, but --WWnnoo--nnaarrrroowwiinngg suppresses the diagnostic.  Note that this does not
+           affect the meaning of well-formed code; narrowing conversions are still considered ill-formed in SFINAE
+           contexts.
+
+           With --WWnnaarrrroowwiinngg in C++98, warn when a narrowing conversion prohibited by C++11 occurs within {{ }}, e.g.
+
+                   int i = { 2.2 }; // error: narrowing from double to int
+
+           This flag is included in --WWaallll and --WWcc++++1111--ccoommppaatt.
+
+       --WWnnooeexxcceepptt (C++ and Objective-C++ only)
+           Warn when a noexcept-expression evaluates to false because of a call to a function that does not have a
+           non-throwing exception specification (i.e. "throw()" or "noexcept") but is known by the compiler to never
+           throw an exception.
+
+       --WWnnooeexxcceepptt--ttyyppee (C++ and Objective-C++ only)
+           Warn if the C++17 feature making "noexcept" part of a function type changes the mangled name of a symbol
+           relative to C++14.  Enabled by --WWaabbii and --WWcc++++1177--ccoommppaatt.
+
+           As an example:
+
+                   template <class T> void f(T t) { t(); };
+                   void g() noexcept;
+                   void h() { f(g); }
+
+           In C++14, "f" calls "f<void(*)()>", but in C++17 it calls "f<void(*)()noexcept>".
+
+       --WWccllaassss--mmeemmaacccceessss (C++ and Objective-C++ only)
+           Warn when the destination of a call to a raw memory function such as "memset" or "memcpy" is an object of
+           class type, and when writing into such an object might bypass the class non-trivial or deleted constructor
+           or copy assignment, violate const-correctness or encapsulation, or corrupt virtual table pointers.
+           Modifying the representation of such objects may violate invariants maintained by member functions of the
+           class.  For example, the call to "memset" below is undefined because it modifies a non-trivial class
+           object and is, therefore, diagnosed.  The safe way to either initialize or clear the storage of objects of
+           such types is by using the appropriate constructor or assignment operator, if one is available.
+
+                   std::string str = "abc";
+  
