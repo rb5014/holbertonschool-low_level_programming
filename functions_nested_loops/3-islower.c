@@ -1,21 +1,16 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * _islower - function that checks for lowercase character.
  *
- * Return: Always 0 (Success)
+ * c - parameter containing the character input
+ *
+ * Return: 1 if c is lowercase, 0 otherwise
  */
-int main(void)
+int _islower(int c)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
-	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
-	}
-	return (0);
+	if (c >= 97 && c <= 122)
+		return (1);
+	else
+		return (0);
 }
