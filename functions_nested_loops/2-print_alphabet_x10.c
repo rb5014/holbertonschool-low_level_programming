@@ -1,21 +1,24 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * print_alphabet_x10 - Prints the alphabet followed by a new line, ten times
  *
  * Return: Always 0 (Success)
  */
-int main(void)
+void print_alphabet_x10(void)
 {
-	char c;
+	int i = 0;
 
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
+	while (i < 10)
 	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
+		char c;
+
+		for (c = 'a'; c <= 'z'; c++)
+		{
+			_putchar(c);
+			if (c == 'z')
+				_putchar('\n');
+		}
+		i++;
 	}
-	return (0);
 }
