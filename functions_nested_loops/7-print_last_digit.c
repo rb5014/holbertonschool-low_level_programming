@@ -1,21 +1,15 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * print_last_digit - function that prints the last digit of a number
  *
- * Return: Always 0 (Success)
+ * @n: the parameter to be computed
+ *
+ * Return: n (the value of the last digit)
  */
-int main(void)
+int print_last_digit(int n)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
-	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
-	}
-	return (0);
+	n = n % 10;
+	_putchar(48 + n);
+	return (n);
 }
