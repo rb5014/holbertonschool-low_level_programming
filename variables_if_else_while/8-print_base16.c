@@ -7,5 +7,15 @@
  */
 int main(void)
 {
-        return (0);
+	char c;
+
+	for (c = '0'; c <= '9'; c++)
+		putchar(c);
+	for (c = 'a'; c <= 'f'; c++)
+	{
+		putchar(c);
+		if (c == 'f')
+			putchar('\n');
+	}
+	return (0);
 }
