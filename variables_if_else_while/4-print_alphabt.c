@@ -7,5 +7,21 @@
  */
 int main(void)
 {
-        return (0);
+	char c;
+
+	for (c = 'a'; c <= 'z'; c++)
+	{
+		switch (c)
+		{
+		case 'e':
+			break;
+		case 'q':
+			break;
+		default:
+			putchar(c);
+		}
+		if (c == 'z')
+			putchar('\n');
+	}
+	return (0);
 }
