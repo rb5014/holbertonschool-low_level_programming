@@ -7,5 +7,13 @@
  */
 int main(void)
 {
-        return (0);
+	char c;
+
+	for (c = 'z'; c >= 'a'; c--)
+	{
+		putchar(c);
+		if (c == 'a')
+			putchar('\n');
+	}
+	return (0);
 }
