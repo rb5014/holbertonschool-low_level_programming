@@ -1,21 +1,15 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * _abs - function that prints the sign of a number
  *
- * Return: Always 0 (Success)
+ * @n: the parameter to be computed
+ *
+ * Return: 1 if c is a letter, 0 otherwise
  */
-int main(void)
+int _abs(int n)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
-	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
-	}
-	return (0);
+	if (n < 0)
+		n = -n;
+	return (n);
 }
