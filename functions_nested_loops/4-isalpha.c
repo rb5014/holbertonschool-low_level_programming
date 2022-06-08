@@ -1,21 +1,18 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * _isalpha - function that checks for alphabetic character.
  *
- * Return: Always 0 (Success)
+ * @c: the parameter to be checked
+ *
+ * Return: 1 if c is a letter, 0 otherwise
  */
-int main(void)
+int _isalpha(int c)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
-	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
-	}
-	return (0);
+	if (c >= 65 && c <= 90)
+		return (1);
+	else if (c >= 97 && c <= 122)
+		return (1);
+	else
+		return (0);
 }
