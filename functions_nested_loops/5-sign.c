@@ -1,21 +1,27 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * print_sign - function that prints the sign of a number
  *
- * Return: Always 0 (Success)
+ * @n: the parameter to be checked
+ *
+ * Return: 1 if c is a letter, 0 otherwise
  */
-int main(void)
+int print_sign(int n)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
+	if (n > 0)
 	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
+		_putchar('+');
+		return (1);
 	}
-	return (0);
+	else if (n == 0)
+	{
+		_putchar('0');
+		return (0);
+	}
+	else
+	{
+		_putchar('-');
+		return (-1);
+	}
 }
