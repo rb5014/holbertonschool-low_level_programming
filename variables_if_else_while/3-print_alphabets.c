@@ -7,5 +7,15 @@
  */
 int main(void)
 {
-        return (0);
+	char c;
+
+	for (c = 'a'; c <= 'z'; c++)
+		putchar(c);
+	for (c = 'A'; c <= 'Z'; c++)
+	{
+		putchar(c);
+		if (c == 'Z')
+			putchar('\n');
+	}
+	return (0);
 }
