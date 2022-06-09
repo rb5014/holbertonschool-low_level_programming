@@ -1,21 +1,21 @@
 #include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * print_to_98 - prints all natural numbers from n to 98, followed
+ * by a new line.
  *
- * Return: Always 0 (Success)
+ * @n: parameter to be computed to get the last digit
+ * Return: nothing (void)
  */
-int main(void)
+void print_to_98(int n)
 {
-	char c;
-
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
+	while (n <= 98)
 	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
+		printf("%d", n);
+		if (n != 98)
+			printf(", ");
+		n++;
 	}
-	return (0);
+	printf("\n");
 }
