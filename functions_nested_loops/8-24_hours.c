@@ -1,21 +1,38 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ *  jack_bauer - function that prints the last digit of a number
  *
- * Return: Always 0 (Success)
+ *
+ * Return: n (the value of the last digit)
  */
-int main(void)
+void jack_bauer(void)
 {
-	char c;
+	char i = '0', j, k, l;
 
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
+	while (i <= '2')
 	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
+		j = '0';
+		while (j <= '3')
+		{
+			k = '0';
+			while (k <= '5')
+			{
+				l = '0';
+				while (l <= '9')
+				{
+					_putchar(i);
+					_putchar(j);
+					_putchar(':');
+					_putchar(k);
+					_putchar(l);
+					_putchar('\n');
+					l++;
+				}
+				k++;
+			}
+			j++;
+		}
+		i++;
 	}
-	return (0);
 }
