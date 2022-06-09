@@ -1,21 +1,17 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Entry point
+ * add - function that adds two integers and returns the result res
  *
- * Return: Always 0 (Success)
+ * @a: parameter to be computed
+ * @b: parameter to be computed
+ * Return: n (the value of the last digit)
  */
-int main(void)
-{
-	char c;
 
-	for (c = 'a'; c <= 'z'; c++)
-		putchar(c);
-	for (c = 'A'; c <= 'Z'; c++)
-	{
-		putchar(c);
-		if (c == 'Z')
-			putchar('\n');
-	}
-	return (0);
+int add(int a, int b)
+{
+	int res;
+
+	res = a + b;
+	return (res);
 }
