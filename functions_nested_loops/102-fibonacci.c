@@ -9,20 +9,21 @@
 
 int main(void)
 {
-	unsigned int i, f1 = 1, f2 = 2, f3, firsttime = 1;
+	unsigned long f1 = 1, f2 = 2, f3;
+	int firsttime = 1, i;
 
-	for (i = 0; i < 48; i++)
+	for (i = 0; i < 49; i++)
 	{
 		if (firsttime == 1)
 		{
-			printf("%u, %u", f1, f2);
+			printf("%lu, %lu", f1, f2);
 			firsttime = 0;
 		}
 		else
 		{
 			printf(", ");
 	       		f3 = f1 + f2;
-			printf("%u", f3);
+			printf("%lu", f3);
 			f1 = f2;
 			f2 = f3;
 		}
