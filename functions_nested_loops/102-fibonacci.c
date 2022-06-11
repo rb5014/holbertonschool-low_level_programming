@@ -22,7 +22,7 @@ int main(void)
 		else
 		{
 			printf(", ");
-	       		f3 = f1 + f2;
+			f3 = f1 + f2;
 			printf("%lu", f3);
 			f1 = f2;
 			f2 = f3;
