@@ -12,7 +12,7 @@ int main(void)
 	unsigned long f1 = 1, f2 = 2, f3 = 0, even = 0;
 	int i;
 
-	while (f3 <= 4000000)
+	while (f1 <= 4000000 && f2 <= 4000000)
 	{
 		f3 = f1 + f2;
 		f1 = f2;
