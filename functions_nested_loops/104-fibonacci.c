@@ -9,20 +9,20 @@
 
 int main(void)
 {
-	double f1 = 1, f2 = 2, f3;
+	long double f1 = 1, f2 = 2, f3;
 	int i;
 
 	for (i = 0; i <= 96; i++)
 	{
 		if (i == 0)
 		{
-			printf("%.0f, %.0f", f1, f2);
+			printf("%.0Lf, %.0Lf", f1, f2);
 		}
 		else
 		{
 			printf(", ");
 			f3 = f1 + f2;
-			printf("%.0f", f3);
+			printf("%.0Lf", f3);
 			f1 = f2;
 			f2 = f3;
 		}
