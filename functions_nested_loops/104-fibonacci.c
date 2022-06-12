@@ -16,7 +16,7 @@ int main(void)
 	{
 		if (firsttime == 1)
 		{
-			printf("%.0Lf, %.0Lf", f1, f2);
+			printf("%.0Lf %.0Lf", f1, f2);
 			firsttime = 0;
 		}
 		else
