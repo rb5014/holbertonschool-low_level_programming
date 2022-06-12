@@ -24,7 +24,7 @@ int main(void)
 			f3 = f1 + f2;
 			if (i == 91)
 			{
-				f3 = f3 + 1;
+				f3--;
 			}
 			printf("%.0Lf", f3);
 			f1 = f2;
