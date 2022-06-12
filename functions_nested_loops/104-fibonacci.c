@@ -12,7 +12,7 @@ int main(void)
 	long double f1 = 1, f2 = 2, f3;
 	int firsttime = 1, i;
 
-	for (i = 0; i <= 98; i++)
+	for (i = 0; i <= 96; i++)
 	{
 		if (firsttime == 1)
 		{
