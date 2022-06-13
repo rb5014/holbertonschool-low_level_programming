@@ -18,9 +18,9 @@ void more_numbers(void)
 			d2 = i % 10;
 			if (d1 != 0)
 			{
-				_putchar(d1);
+				_putchar('0' + d1);
 			}
-			_putchar(d2);
+			_putchar('0' + d2);
 		}
 		_putchar('\n');
 	}
