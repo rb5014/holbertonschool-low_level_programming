@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * puts - prints a string, followed by a new line, to stdout
+ * _puts - prints a string, followed by a new line, to stdout
  *
  * @str: pointer containing string adress
  *
