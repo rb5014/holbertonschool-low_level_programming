@@ -1,14 +1,23 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * print_rev - prints a string, in reverse, +\n
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @s: pointer to adress of the string passed
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void print_rev(char *s)
 {
-	*n = 98;
+	int i = 0;
+
+	while (s[i])
+		i++;
+	while (i >= 0)
+	{
+		_putchar(s[i]);
+		i--;
+	}
+	_putchar('\n');
 }
