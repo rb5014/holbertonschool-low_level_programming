@@ -1,14 +1,17 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * swap_int - swaps values of two integers
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @a: pointer to use as a parameter for swap
+ * @b: pointer to use as a parameter for swap
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void swap_int(int *a, int *b)
 {
-	*n = 98;
+	*a = *a + *b;
+	*b = *a - *b;
+	*a = *a - *b;
 }
