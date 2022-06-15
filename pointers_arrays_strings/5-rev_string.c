@@ -12,7 +12,7 @@ void rev_string(char *s)
 {
 	int len = 0, i, tmp;
 
-	while(s[len]) /* get the lenght of the string*/
+	while (s[len]) /* get the lenght of the string*/
 	{
 		len++;
 	}
@@ -21,6 +21,6 @@ void rev_string(char *s)
 	{
 		tmp = s[i];
 		s[i] = s[len - i - 1];
-		s[len - i -1] = tmp;
+		s[len - i - 1] = tmp;
 	}
 }
