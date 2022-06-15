@@ -1,14 +1,20 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * _strlen - returns the length of a string
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @s: string passed through a pointer char *s
  *
- * Return: nothing(void)
+ * Return: lenght of the string(int)
  */
 
-void reset_to_98(int *n)
+int _strlen(char *s)
 {
-	*n = 98;
+	int i = 0;
+
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
