@@ -1,14 +1,26 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * rev_string - reverses a string
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @s: pointer of a string
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void rev_string(char *s)
 {
-	*n = 98;
+	int i, j = 0;
+	char tmp[10];
+
+	for (i = 0; s[i]; i++)
+	{
+		tmp[i] = s[i];
+	}
+	while (j < 9)
+	{
+		s[i - 1] = tmp[j];
+		i--;
+		j++;
+	}
 }
