@@ -1,14 +1,21 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * puts - prints a string, followed by a new line, to stdout
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @str: pointer containing string adress
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void _puts(char *str)
 {
-	*n = 98;
+	int i = 0;
+
+	while (str[i])
+	{
+		_putchar(str[i]);
+		i++;
+	}
+	_putchar('\n');
 }
