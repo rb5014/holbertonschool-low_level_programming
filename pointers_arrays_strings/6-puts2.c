@@ -1,14 +1,24 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * puts2 - prints every other character of a string, starting with 1st char
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @str: pointer containing string adress
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void puts2(char *str)
 {
-	*n = 98;
+	int i = 0;
+
+	while (str[i])
+	{
+		if (i % 2 == 0)
+		{
+		_putchar(str[i]);
+		}
+		i++;
+	}
+	_putchar('\n');
 }
