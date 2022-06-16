@@ -1,14 +1,25 @@
 #include "main.h"
-
+#include <stdio.h>
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * print_array - prints n elements of an array of integers
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @a: pointer containing adress the adress of the first element of the array
+ * @n: number of elements to print
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void print_array(int *a, int n)
 {
-	*n = 98;
+	int i;
+
+	for (i = 0; i < n; i++)
+	{
+		if (i > 0)
+		{
+			printf(", ");
+		}
+		printf("%d", a[i]);
+	}
+	printf("\n");
 }
