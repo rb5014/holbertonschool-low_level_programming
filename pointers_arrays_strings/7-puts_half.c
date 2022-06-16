@@ -18,8 +18,6 @@ void puts_half(char *str)
 	{
 		len++;
 	}
-	_putchar(str[len + 1]);
-	_putchar('\n');
 	len++;
 	if (len % 2 == 0) /* get the right number of char to print */
 		half = len / 2;
