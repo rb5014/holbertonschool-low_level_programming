@@ -17,9 +17,17 @@ char *cap_string(char *s)
 	{
 		for (j = 0; sep[j]; j++)
 		{
-			if (s[i] == sep[j])
-				if (s[i + 1] >= 'a' && s[i + 1] <= 'z')
-					s[i + 1] = s[i + 1] - ('a' - 'A');		}
+
+/*
+ * if value before is a separator or nothing then
+ * if lowercase go uppercase
+ */
+			if (s[i - 1] == sep[j] || !(s[i - 1]))
+			{
+				if (s[i] >= 'a' && s[i] <= 'z')
+					s[i] = s[i] - ('a' - 'A');
+			}
+		}
 		i++;
 	}
 	return (s);
