@@ -24,7 +24,7 @@ void puts_half(char *str)
 	else
 		half = (len - 1) / 2;
 
-	while (half < len) /* prints the second half of the string */
+	while (half < len - 1) /* prints the second half of the string */
 	{
 		_putchar(str[half]);
 		half++;
