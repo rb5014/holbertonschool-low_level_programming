@@ -10,21 +10,20 @@
 
 void puts_half(char *str)
 {
-	int len = 0, half, nbchar;
+	int len = 0, half;
 
-	while (str[len])
+	while (str[len]) /* length of the string len */
 	{
 		len++;
 	}
-	nbchar = len - 1;
-	if (nbchar % 2 == 0)
-		half = nbchar / 2;
+	if (len % 2 == 0) /* get the right number of char to print */
+		half = len / 2;
 	else
-		half = (nbchar - 1) / 2;
+		half = (len - 1) / 2;
 
-	while (half <= nbchar)
+	while (half < len) /* prints the second half of the string */
 	{
-		_putchar(str[half]);
+		_putchar(str[half + 1]);
 		half++;
 	}
 	_putchar('\n');
