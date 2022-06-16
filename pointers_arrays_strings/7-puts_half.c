@@ -1,14 +1,31 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
+ * puts_half - prints half of a string
  *
- * @n: pointer to use as a parameter to pass a value to the var it points to
+ * @str: pointer containing string adress
  *
  * Return: nothing(void)
  */
 
-void reset_to_98(int *n)
+void puts_half(char *str)
 {
-	*n = 98;
+	int len = 0, half;
+
+	while (str[len])
+	{
+		len++;
+	}
+
+	if (len % 2 == 0)
+		half = len / 2;
+	else
+		half = (len - 1) / 2;
+
+	while (half < len)
+	{
+		_putchar(str[half]);
+		half++;
+	}
+	_putchar('\n');
 }
