@@ -1,14 +1,22 @@
 #include "main.h"
 
 /**
- * reset_to_98 - pointer as parameter,updates value it points to to 98
- *
+ * _strcpy - copies the string pointed to src to the buffer pointed to by dest
+ * + include \0
  * @n: pointer to use as a parameter to pass a value to the var it points to
  *
- * Return: nothing(void)
+ * Return: the pointer to dest
  */
 
-void reset_to_98(int *n)
+char *_strcpy(char *dest, char *src)
 {
-	*n = 98;
+	int i = -1; /* start at -1 to get to 0 when enter loop */
+
+	do /* do while to do statements before condition checked */
+	{
+		i++;
+		dest[i] = src[i];
+	}
+	while (src[i]);
+	return(dest);
 }
