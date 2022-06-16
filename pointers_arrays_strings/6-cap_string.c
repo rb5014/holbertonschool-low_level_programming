@@ -10,15 +10,16 @@
 
 char *cap_string(char *s)
 {
-	int i = 0;
+	int i = 0, j = 0;
+	char *sep = " \t\n,;.!?\"(){}";
 
 	while (s[i])
 	{
-		if (s[i - 1] == 32)
+		for (j = 0; sep[j]; j++)
 		{
-			if (s[i] >= 'a')
-				s[i] = s[i] - ('a' - 'A');
-		}
+			if (s[i] == sep[j])
+				if (s[i + 1] >= 'a' && s[i + 1] <= 'z')
+					s[i + 1] = s[i + 1] - ('a' - 'A');		}
 		i++;
 	}
 	return (s);
