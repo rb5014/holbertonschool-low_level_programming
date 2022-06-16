@@ -10,19 +10,19 @@
 
 void puts_half(char *str)
 {
-	int len = 0, half;
+	int len = 0, half, nbchar;
 
 	while (str[len])
 	{
 		len++;
 	}
-
-	if (len % 2 == 0)
-		half = len / 2;
+	nbchar = len - 1;
+	if (nbchar % 2 == 0)
+		half = nbchar / 2;
 	else
-		half = (len - 1) / 2;
+		half = (nbchar - 1) / 2;
 
-	while (half < len)
+	while (half <= nbchar)
 	{
 		_putchar(str[half]);
 		half++;
