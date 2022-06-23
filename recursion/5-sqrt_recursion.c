@@ -9,14 +9,14 @@
  * root
  */
 
-int _sqrt(int n, int sq)
+unsigned int _sqrt(int n, int sq)
 {
-	if (sq <= 0)
+	if (sq == n)
 		return (-1);
-	else if (n / sq == sq && n % sq == 0)
+	if (sq * sq == n)
 		return (sq);
-	else
-		return (_sqrt(n, sq - 1));
+
+	return (_sqrt(n, sq + 1));
 }
 
 /**
@@ -28,5 +28,11 @@ int _sqrt(int n, int sq)
  */
 int _sqrt_recursion(int n)
 {
-	return (_sqrt(n, n));
+	int sq = 1;
+
+	if (n == 1)
+		return (1);
+	if (n < 1)
+		return (-1);
+	return (_sqrt(n, sq));
 }
