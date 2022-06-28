@@ -4,34 +4,20 @@
 #include <string.h>
 
 /**
- * _strdup - returns pointertonew allocated space in mem,(contains cpy of str)
+ * free_grid - frees a 2 dim gris previously created by alloc_grid function
  *
- * Description: The _strdup() function returns a pointer to a new string
- * which is a duplicate of the string str.
- * Memory for the new string is obtained
- * with malloc, and can be freed with free.
- * @str: string to copy
+ * Description: Compile witg alloc_grid.c
+ * @grid: 2 dimensional grid
+ * @height: number of rows
  *
- * Return: NULL if str == NULL,or pointer to a duplicated string.
- * NULL if insufficient mem was available
+ * Return: nothing (void)
  */
 
-char *_strdup(char *str)
+void free_grid(int **grid, int height)
 {
-	char *cpy;
-	unsigned int len, i;
+	int i;
 
-	if (!str)
-		return (NULL);
-
-	len = strlen(str);
-	cpy = malloc((len + 1) * sizeof(char));
-	if (cpy)
-	{
-		for (i = 0; i <= len; i++)
-			cpy[i] = str[i];
-		return (cpy);
-	}
-	else
-		return (NULL);
+	for (i = 0; i < height; i++)
+		free(grid[i]);
+	free(grid);
 }
