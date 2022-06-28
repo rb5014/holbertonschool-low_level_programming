@@ -21,16 +21,15 @@ char *_strdup(char *str)
 	char *cpy;
 	unsigned int len, i;
 
-	len = strlen(str);
-
-	cpy = malloc((len) * sizeof(char));
-
-	if (cpy && str)
-	{
-	for (i = 0; i <= len; i++)
-		cpy[i] = str[i];
-	return (cpy);
-	}
+	if (!str)
+		return NULL;
 	else
-		return (NULL);
+	{
+		len = strlen(str);
+		cpy = malloc((len) * sizeof(char));
+
+		for (i = 0; i <= len; i++)
+			cpy[i] = str[i];
+		return (cpy);
+	}
 }
