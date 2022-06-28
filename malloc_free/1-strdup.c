@@ -22,20 +22,18 @@ char *_strdup(char *str)
 	unsigned int len, i;
 
 	if (!str)
-		return NULL;
-	else
-	{
-		len = strlen(str);
+		return (NULL);
+
+	len = strlen(str);
 		printf("%d\n", len);
 		cpy = malloc((len + 1) * sizeof(char));
 		if (cpy)
 		{
 			for (i = 0; i <= len; i++)
-			cpy[i] = str[i];
-		printf("%c\n %c\n %d\n", cpy[i], str[i], i);
+				cpy[i] = str[i];
+			printf("%c\n %c\n %d\n", cpy[i], str[i], i);
 		return (cpy);
 		}
 		else
 			return (NULL);
-	}
 }
