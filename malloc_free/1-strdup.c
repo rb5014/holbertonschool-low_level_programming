@@ -26,11 +26,13 @@ char *_strdup(char *str)
 	else
 	{
 		len = strlen(str);
-		cpy = malloc((len) * sizeof(char));
+		printf("%d\n", len);
+		cpy = malloc((len + 1) * sizeof(char));
 		if (cpy)
 		{
-		for (i = 0; i <= len; i++)
+			for (i = 0; i <= len; i++)
 			cpy[i] = str[i];
+		printf("%c\n %c\n %d\n", cpy[i], str[i], i);
 		return (cpy);
 		}
 		else
