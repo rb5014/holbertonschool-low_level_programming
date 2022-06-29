@@ -23,11 +23,11 @@ int *array_range(int min, int max)
 	if (min > max)
 		return (NULL);
 
-	p = malloc(len * sizeof(int));
+	p = malloc(len * sizeof(int) + 1);
 	if (!p)
 		return (NULL);
 
-	while (i < len)
+	while (i <= len)
 	{
 		p[i] = min + i;
 		i++;
