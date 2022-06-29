@@ -17,10 +17,17 @@
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	int *p;
+	unsigned int i;
 
-	p = malloc(nmemb * size);
+	p = malloc(nmemb * sizeof(size));
 	if (p)
+	{
+		for (i = 0; i < nmemb; i++)
+		{
+			p[i] = 0;
+			i++;
+		}
 		return (p);
-
+	}
 	return (NULL);
 }
