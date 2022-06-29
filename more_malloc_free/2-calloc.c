@@ -16,17 +16,13 @@
 
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	char *p;
-	unsigned int i;
+	void *p;
+	int i;
 
-	p = malloc(nmemb * sizeof(size));
+	p = malloc(nmemb * size);
 
-	if (p)
-	{
-		for (i = 0; i <= nmemb; i++)
-			p[i] = 0;
-
-		return (p);
-	}
-	return (NULL);
+	if (!p)
+		return (NULL);
+	memset(p, 0, nmemb * size);
+	return (p);
 }
