@@ -1,4 +1,2 @@
-#ifndef MAIN_H
-#define MAIN_H
-
-#endif
+#pragma once
+#define PI 3.14159265359
