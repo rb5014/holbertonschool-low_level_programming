@@ -1,6 +1,6 @@
 #include "dog.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 /**
  * new_dog - creates a new dog
  * need to store a copy of name and owner
@@ -14,20 +14,15 @@
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t doggy;
-	dog_t *doggyptr;
-	char *namecpy;
-	char *ownercpy;
+	dog_t *dog;
 
-	doggyptr = &doggy;
-	namecpy = name;
-	ownercpy = owner;
-	doggyptr->name = namecpy;
-	doggyptr->age = age;
-	doggyptr->owner = ownercpy;
-
-	if (!doggyptr)
+	dog = malloc(sizeof(dog_t));
+	if (!dog)
 		return (NULL);
 
-	return (doggyptr);
+	dog->name = name;
+	dog->age = age;
+	dog->owner = owner;
+
+	return (dog);
 }
