@@ -24,22 +24,6 @@
 int main(int argc, char *argv[])
 {
 
-	char *op[] = {"+", "-", "*", "/", "%"};
-	int i = 0;
-
-	while (i < 5)
-	{
-		if (strcmp(op[i], argv[2]))
-			i++;
-		else
-			break;
-	}
-	if (i == 5)
-	{
-		printf("Error\n");
-		exit(99);
-	}
-
 	if (argc != 4)
 	{
 		printf("Error\n");
@@ -55,7 +39,6 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(100);
 	}
-
 	printf("%d\n", get_op_func(argv[2])(atoi(argv[1]), atoi(argv[3])));
 	return (0);
 }
