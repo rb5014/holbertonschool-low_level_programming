@@ -17,13 +17,13 @@ void print_all(const char * const format, ...)
 {
 	va_list ap;
 	unsigned int i;
-	int c;
+	char c;
 	int j;
 	double f;
 	char *x;
 
 	va_start(ap, format);
-	while(format[i])
+	while (format[i])
 	{
 		switch (format[i])
 		{
