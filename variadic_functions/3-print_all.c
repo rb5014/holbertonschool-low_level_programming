@@ -15,7 +15,6 @@
 
 void print_all(const char * const format, ...)
 {
-	int firsttime;
 	va_list ap;
 	unsigned int i;
 	char c;
@@ -23,14 +22,9 @@ void print_all(const char * const format, ...)
 	double f;
 	char *x;
 
-	firsttime = 1;
 	va_start(ap, format);
 	while (format[i])
 	{
-		if (firsttime == 1)
-			firsttime = 0;
-		else
-			printf(", ");
 		switch (format[i])
 		{
 		case 'c':
@@ -55,6 +49,9 @@ void print_all(const char * const format, ...)
 			i++;
 
 		}
+		if (!(format[i + 1] == '\0'))
+			printf(", ");
+
 		i++;
 	}
 	va_end(ap);
