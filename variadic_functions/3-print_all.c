@@ -20,11 +20,12 @@ void print_all(const char * const format, ...)
 	char c;
 	int j;
 	double f;
-	char *x;
+	char *x, *sep;
 
 	va_start(ap, format);
 	while (format[i])
 	{
+		sep = "' ";
 		switch (format[i])
 		{
 		case 'c':
@@ -46,10 +47,9 @@ void print_all(const char * const format, ...)
 			printf("%s", x);
 			break;
 		default:
-			i++;
-
+			sep = NULL;
 		}
-		if (!(format[i + 1] == '\0'))
+		if (!(format[i + 1] == '\0') && sep)
 			printf(", ");
 
 		i++;
