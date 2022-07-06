@@ -1,0 +1,17 @@
+CC = gcc
+SRC = main.c school.c
+NAME = school
+OBJ = $(SRC:.c=.o)
+RM = rm
+CFLAGS = -Wall -Werror -Wextra -pedantic
+tmp_files = $(shell find -name "*~")
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+all: $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+clean:
+	$(RM) -f $(NAME) $(tmp_files)
+oclean:
+	$(RM) -f $(OBJ)
+fclean: clean oclean
+re: oclean all
