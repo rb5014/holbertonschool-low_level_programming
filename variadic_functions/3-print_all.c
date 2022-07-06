@@ -16,9 +16,7 @@
 void print_all(const char * const format, ...)
 {
 	va_list ap;
-	char c;
-	int i, j;
-	double f;
+	int i;
 	char *x, *sep;
 
 	va_start(ap, format);
@@ -30,13 +28,13 @@ void print_all(const char * const format, ...)
 			switch (format[i])
 			{
 			case 'c':
-				printf("%c", c = va_arg(ap, int));
+				printf("%c", va_arg(ap, int));
 				break;
 			case 'i':
-				printf("%d", j = va_arg(ap, int));
+				printf("%d", va_arg(ap, int));
 				break;
 			case 'f':
-				printf("%f", f = va_arg(ap, double));
+				printf("%f", va_arg(ap, double));
 				break;
 			case 's':
 				x = va_arg(ap, char *);
