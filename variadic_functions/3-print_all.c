@@ -40,9 +40,7 @@ void print_all(const char * const format, ...)
 				break;
 			case 's':
 				x = va_arg(ap, char *);
-				if (x == NULL)
-					x = "(nil)";
-				printf("%s", x);
+				printf("%s", x == NULL ? "(nil)" : x);
 				break;
 			default:
 				sep = NULL;
