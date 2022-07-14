@@ -1,0 +1,1 @@
+This is the readme file of the project singly_linked_lists
