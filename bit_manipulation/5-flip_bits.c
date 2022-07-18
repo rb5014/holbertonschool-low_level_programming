@@ -9,8 +9,9 @@
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned int flippednum = n ^ m; /* XOR to flip specific bits */
+	unsigned long int flippednum = n ^ m; /* XOR to flip specific bits */
 	int count = 0; /* count the number of times a bit is flipped */
+
 
 	while (flippednum > 0)
 	{
