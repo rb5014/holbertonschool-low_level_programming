@@ -10,12 +10,14 @@
 int get_bit(unsigned long int n, unsigned int index)
 {
 	int b;
+	int range = 63 - index;
 
-	if (index > 0)
-		b = get_bit(n >> 1, index - 1);
-	else
-		b = n & 1;
-	if (n == ULONG_MAX && index > 0)
+
+	if (range < 0) /* check if index is out of range) */
 		return (-1);
-	return (b);
+	b = n >> index;
+	if (b % 2 == 1)
+		return (1);
+	else
+		return (0);
 }
