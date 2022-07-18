@@ -1,5 +1,26 @@
 #include "main.h"
-#include <math.h>
+#include <string.h>
+#include <stdio.h>
+/**
+ * powbin - raise 2 to the power exp
+ * @exp: number of times to multiply 2 with 2
+ *
+ * Return: the resulting number
+ */
+unsigned int powbin(int exp)
+{
+	unsigned int sum = 1;
+
+	if (exp == 0)
+		return (1);
+	while (exp > 0)
+	{
+		sum = sum * 2;
+		exp--;
+	}
+	return (sum);
+}
+
 /**
  * binary_to_uint - converts a binary number to an unsigned int
  * @b: pointer to a string of 0 and 1 chars
@@ -10,15 +31,18 @@
 
 unsigned int binary_to_uint(const char *b)
 {
-	int i;
 	unsigned int uint = 0;
+	int i, len;
+
 
 	if (!(b))
 		return (0);
+
+	len = strlen(b);
 	for (i = 0; b[i]; i++)
 	{
 		if (b[i] == '1')
-			uint += pow(2, i);
+			uint += powbin(len - 1 - i);
 		else if (b[i] != '0')
 			return (0);
 	}
