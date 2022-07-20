@@ -13,7 +13,7 @@
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	void *buf = malloc(letters + 1);
-	int fd;
+	int fd, nb_c;
 
 	if (!(filename))
 		return (0);
@@ -21,6 +21,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	fd = open(filename, O_RDWR, 0600);
 	if (fd == -1)
 		return (0);
-
-	return (write(1, buf, read(fd, buf, letters)));
+	nb_c = read(fd, buf, letters);
+	close(fd);
+	return (write(1, buf, nb_c));
 }
