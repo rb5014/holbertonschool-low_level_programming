@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	cl = close(fd);
 	fd = creat(argv[2], 0664);
 	wr = write(fd, buffer, rd);
-	if (fd == -1 | wr == -1)
+	if ((fd == -1) | (wr == -1))
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
