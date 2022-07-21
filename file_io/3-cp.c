@@ -27,6 +27,7 @@
 int main(int argc, char *argv[])
 {
 	char buffer[1024];
+	char* noread = "Error: Can't read from file";
 	int fd, fd2, wr, cl, rd = -1;
 
 	if (argc != 3)
@@ -35,17 +36,16 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
-			argv[1]);
-		exit(98);
-	}
 	while (rd != 0)
 	{
 		if (rd == -1)
 			fd2 = creat(argv[2], 0664);
 		rd = read(fd, buffer, 1024);
+		if ((fd == -1) | (rd == -1))
+		{
+			dprintf(STDERR_FILENO, "%s%s\n", noread, argv[1]);
+		exit(98);
+		}
 		wr = write(fd2, buffer, rd);
 	}
 	if ((fd2 == -1) | (wr == -1))
