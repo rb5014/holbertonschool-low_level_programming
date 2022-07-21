@@ -27,7 +27,7 @@
 int main(int argc, char *argv[])
 {
 	char buffer[1024];
-	char* noread = "Error: Can't read from file";
+	char *noread = "Error: Can't read from file ";
 	int fd, fd2, wr, cl, rd = -1;
 
 	if (argc != 3)
