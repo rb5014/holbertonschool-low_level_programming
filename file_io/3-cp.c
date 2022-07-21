@@ -27,7 +27,7 @@
 int main(int argc, char *argv[])
 {
 	char buffer[1024];
-	int fd, wr, cl, rd;
+	int fd, fd2, wr, cl, rd = -1;
 
 	if (argc != 3)
 	{
@@ -37,19 +37,24 @@ int main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
+			argv[1]);
 		exit(98);
 	}
-	rd = read(fd, buffer, 1024);
-	cl = close(fd);
-	fd = creat(argv[2], 0664);
-	wr = write(fd, buffer, rd);
-	if ((fd == -1) | (wr == -1))
+	while (rd != 0)
+	{
+		if (rd == -1)
+			fd2 = creat(argv[2], 0664);
+		rd = read(fd, buffer, 1024);
+		wr = write(fd2, buffer, rd);
+	}
+	if ((fd2 == -1) | (wr == -1))
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 	cl = close(fd);
+	close(fd2);
 	if (cl == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
