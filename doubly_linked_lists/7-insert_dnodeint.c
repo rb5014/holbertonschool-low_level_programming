@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdio.h>
 /**
  * insert_dnodeint_at_index - inserts a new node at a given position
  * @h: pointer to a pointer to first node
@@ -13,24 +14,31 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	if (h)
 	{
-		do {
-			if (idx == 0)
-			{
-				dlistint_t *tmp;
+		unsigned int i = 0;
+		dlistint_t *tmp = *h;
+		dlistint_t *new;
 
-				tmp = malloc(sizeof(dlistint_t));
-				if (!(tmp))
-					return (NULL);
-				tmp->n = n;
-				tmp->next = *h;
-				*h = tmp;
-				return (*h);
-			}
-			else
-			{
-				h = &(*h)->next;
-			}
-		} while (idx-- && *h);
+
+		if (idx == 0)
+			return (add_dnodeint(h, n));
+
+		new = malloc(sizeof(dlistint_t));
+		if (!(new))
+			return (0);
+		new->n = n;
+		while (i < idx - 1 && tmp->next)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		if (tmp == NULL)
+			return (NULL);
+		if (i == idx - 1)
+		{
+			new->next = tmp->next;
+			tmp->next = new;
+		}
+		return (new);
 	}
 	return (NULL);
 }
