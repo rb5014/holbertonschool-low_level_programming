@@ -16,9 +16,12 @@
 	if (key && hn)
 	{
 		k = key_index((unsigned char *)key, ht->size);
+		if (ht->array[k] == NULL)
+			hn->next = NULL;
+		else
+			hn->next = ht->array[k];
 		hn->key = strdup(key);
 		hn->value =  strdup(value);
-		hn->next = NULL;
 		if (hn->value && hn->key)
 		{
 			ht->array[k] = hn;
