@@ -30,9 +30,9 @@ int recursive_bin_search(int *array, size_t min, size_t max, int value)
 {
 	size_t mid = (max + min) / 2;
 
-	print_array(array, min, max);
 	if (max < min)
 		return (-1);
+	print_array(array, min, max);
 	if (array[mid] == value)
 		return (mid);
 	if (array[mid] < value)
