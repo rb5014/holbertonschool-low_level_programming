@@ -13,7 +13,7 @@ void print_array(int *array, size_t min, size_t max)
 	for (j = min; j <= max; j++)
 	{
 		if (j > min)
-			printf(" ,");
+			printf(", ");
 		printf("%d", array[j]);
 	}
 	printf("\n");
