@@ -1,56 +1,84 @@
-# Low-Level Programming - Data Structures, Algorithms, Linux/Unix System Programming
+# C - Doubly linked lists
 
-This repository contains programs written for the low-level programming and
-algorithm track at Holberton School. In these projects, which  occurred
-throughout the duration of the Year 1 curriculum, I learned about data
-structures, algorithms, and other low-level programming concepts while
-working in the C language. The specific list of projects contained follows:
+In this project, I learned about using doubly-linked lists in C.
 
-* [0x00. C - Hello, World](./0x00-hello_world)
-* [0x01. C - Variables, if, else, while](./0x01-variables_if_else_while)
-* [0x02. C - Functions, nested loops](./0x02-functions_nested_loops)
-* [0x03. C - More functions, more nested loops](./0x03-more_functions_nested_loops)
-* [0x04. C - Pointers, arrays and strings](./0x04-pointers_arrays_strings)
-* [0x05. C - More pointers, arrays and strings](./0x05-pointers_arrays_strings)
-* [0x06. C - Even more pointers, arrays and strings](./0x06-pointers_arrays_strings)
-* [0x07. C - Recursion](./0x07-recursion)
-* [0x08. C - Static libraries](./0x08-static_libraries)
-* [0x09. C - argc, argv](./0x09-argc_argv)
-* [0x0A. C - malloc, free](./0x0A-malloc_free)
-* [0x0B. C - More malloc, free](./0x0B-more_malloc_free)
-* [0x0C. C - Preprocessor](./0x0C-preprocessor)
-* [0x0D. C - Structures, typedef](./0x0D-structures_typedef)
-* [0x0E. C - Function pointers](./0x0E-function_pointers)
-* [0x0F. C - Variadic functions](./0x0F-variadic_functions)
-* [0x10. C - printf](https://github.com/bdbaraban/printf/tree/master)
-* [0x11. C - Singly linked lists](./0x11-singly_linked_lists)
-* [0x12. C - More singly linked lists](./0x12-more_singly_linked_lists)
-* [0x13. C - Bit manipulation](./0x13-bit_manipulation)
-* [0x14. C - File I/O](./0x14-file_io)
-* [0x15. C - Simple Shell](https://github.com/bdbaraban/simple_shell/tree/master)
-* [0x16. C - Doubly linked lists](./0x16-doubly_linked_lists)
-* [0x17. C - Dynamic libraries](./0x17-dynamic_libraries)
-* [0x18. C - Stacks, Queues - LIFO, FIFO](https://github.com/bdbaraban/monty/tree/master)
-* [0x19. C - Hash tables](./0x19-hash_tables)
-* [0x1A. C - Sorting algorithms & Big O](./0x1A-sorting_algorithms)
-* [0x1B. C - Makefiles](./0x1B-makefiles)
-* [0x1C. C - Binary trees](https://github.com/bdbaraban/0x1C-binary_trees/tree/master)
-* [0x1D. C - Search Algorithms](./0x1D-search_algorithms)
+## Tests :heavy_check_mark:
 
-## Author :black_nib:
+* [tests](./tests): Folder of test files. Provided by Holberton School.
 
-* __Brennan D Baraban__ <[bdbaraban](https://github.com/bdbaraban)>
+## Header File :file_folder:
 
-## Acknowledgements :pray:
+* [lists.h](./lists.h): Header file containing definitions and prototypes for all types
+and functions written for the project.
 
-All work contained in this project was completed as part of the curriculum for
-Holberton School. Holberton School is a campus-based full-stack software
-engineering program that prepares students for careers in the tech industry
-using project-based peer learning. For more information, visit
-[this link](https://www.holbertonschool.com/).
+| Type/File           | Definition/Prototype           |
+| ------------------- | ------------------------------ |
+| `struct dlistint_s`    | <ul><li>`int n`</li><li>`struct dlistint_s *prev`</li><li>`struct dlistint_s *new`</li></ul> |
+| `typedef dlistint_t`   | `struct dlistint_s`                                                                          |
+| `0-print_dlistint.c`   | `size_t print_dlistint(const dlistint_t *h);`                                                |
+| `1-dlistint_len.c`     | `size_t dlistint_len(const dlistint_t *h);`                                                  |
+| `2-add_dnodeint.c`  | `dlistint_t *add_dnodeint(dlistint_t **head, const int n);`                                     |
+| `3-add_dnodeint_end.c` | `dlistint_t *add_dnodeint_end(dlistint_t **head, const int n);`                              |
+| `4-free_dlistint.c`    | `void free_dlistint(dlistint_t *head);`                                                      |
+| `5-get_dnodeint.c`     | `dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index);`                   |
+| `6-sum_dlistint.c`     | `int sum_dlistint(dlistint_t *head);`                                                        |
+| `7-insert_dnodeint.c`  | `dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n);`             |
+| `8-delete_dnodeint.c`  | `int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);`                       |
 
-<p align="center">
-  <img
-    src="http://www.holbertonschool.com/holberton-logo.png"
-    alt="Holberton School logo">
-</p>
+## Tasks :page_with_curl:
+
+* **0. Print list**
+  * [0-print_dlistint.c](./0-print_dlinstint.c): C function that prints all the elements
+  of a doubly-linked `dlistint_t` list.
+  * Returns the number of nodes in the list.
+
+* **1. List length**
+  * [1-dlistint_len.c](./1-dlistint_len.c): C function that returns the number of nodes in
+  a doubly-linked `dlistint_t` list.
+
+* **2. Add node**
+  * [2-add_dnodeint.c](./2-add_dnodeint.c): C function that adds a new node at the
+  beginning of a doubly-linked `dlistint_t` list.
+  * If the function fails - returns `NULL`.
+  * Otherwise - returns the address of the new element.
+
+* **3. Add node at the end**
+  * [3-add_dnodeint_end.c](./3-add_dnodeint_end.c): C function that adds a new
+  node at the end of a doubly-linked `dlistint_t` list.
+  * If the function fails - returns `NULL`.
+  * Otherwise - returns the address of the new element.
+
+* **4. Free list**
+  * [4-free_dlistint.c](./4-free_dlistint.c): C function that frees a
+  doubly-linked `dlistint_t` list.
+
+* **5. Get node at index**
+  * [5-get_dnodeint.c](./5-get_dnodeint.c): C function that locates a given node of a
+  doubly-linked `dlistint_t` list.
+  * The parameter `index` is the index of the node to locate - indices start at `0`.
+  * If the node does not exist - returns `NULL`.
+  * Otherwise - returns the address of the located node.
+
+* **6. Sum list**
+  * [6-sum_dlistint.c](./6-sum_dlistint.c): C function that sums all the data (`n`)
+  of a doubly-linked `dlistint_t` list.
+  * If the list is empty - returns `0`.
+  * Otherwise - returns the sum of all the data (`n`).
+
+* **7. Insert at index**
+  * [7-insert_dnodeint.c](./7-insert_dnodeint.c): C function that inserts a new node at a
+  given position.
+  * The parameter `idx` is the index of the list where the new node should
+  be added - indices start at `0`.
+  * If the function fails - returns `NULL`.
+  * Otherwise - returns the address of the new element.
+  * Requires compilation with functions defined in [2-add_dnodeint.c](./2-add_dnodeint.c)
+  and [3-add_dnodeint_end.c](./3-add_dnodeint_end.c).
+
+* **8. Delete at index**
+  * [8-delete_dnodeint.c](./8-delete_dnodeint.c): C function that deletes the node at
+  index `index` of a doubly-linked `dlistint_t` list.
+  * The paramter `index` is the index of the node to delete - indices start at `0`.
+  * If the function fails - returns `-1`.
+  * Otherwise - returns `1`.
+
