@@ -3,9 +3,9 @@
 In this project, I learned about what and how to use pointers and arrays and
 the differences between the two as well as how to use and manipulate strings in C.
 
-## Tests :heavy_check_mark:
+## Tests 1:heavy_check_mark:
 
-* [tests](./tests): Folder of test files. Provided by Holberton School.
+* [tests_1](./tests_1): Folder of test files. Provided by Holberton School.
 
 ## Helper File :raised_hands:
 
@@ -84,6 +84,11 @@ the differences between the two as well as how to use and manipulate strings in 
 
 
 
+## Tests 2:heavy_check_mark:
+
+* [tests_2](./tests_2): Folder of test files. Provided by Holberton School.
+
+
 | File                 | Prototype                                                      |
 | -------------------- | -------------------------------------------------------------- |
 | `0-strcat.c`         | `char *_strcat(char *dest, char *src);`                        |
@@ -140,6 +145,10 @@ the differences between the two as well as how to use and manipulate strings in 
     * Letters `t` and `T` are replaced by `7`.
     * Letters `l` and `L` are replaced by `1`.
 
+
+## Tests 3:heavy_check_mark:
+
+* [tests_3](./tests_3): Folder of test files. Provided by Holberton School.
 
 
 | File         | Prototype                                               |
